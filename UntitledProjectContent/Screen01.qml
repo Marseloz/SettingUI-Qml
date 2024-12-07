@@ -19,7 +19,7 @@ Rectangle {
     color: "#282828"
     border.width: 0
 
-    ListModel {
+    ListModel { //модель на основе которой генерируется интерфейс настроек
         id: listMod1
         ListElement {
             name: "Red"
@@ -96,7 +96,7 @@ Rectangle {
             Layout.fillHeight: true
             spacing: 0
             ColumnLayout {
-                spacing: 0
+                spacing: 3
                 id: columnLayout
                 Layout.topMargin: 22
                 Layout.margins: 20
@@ -111,7 +111,7 @@ Rectangle {
                     Layout.fillWidth: true
                     Layout.fillHeight: true
                     model: listMod1
-                    delegate: Row {
+                    delegate: Row { //делегат отвечающий за отображение разделов настроек
                         id: row
                         spacing: 5
                         Item {
@@ -161,6 +161,7 @@ Rectangle {
                 }
                 Item {
                     id: name
+
                     Layout.fillWidth: true
                     Layout.fillHeight: true
                     Rectangle {
@@ -169,7 +170,7 @@ Rectangle {
                         anchors.fill: parent
                     }
 
-                    DelegateChooser { //делегат интерфейса
+                    DelegateChooser { //делегат отвечающий за логику отображения пунктов настроек
                         id: chooser
                         role: "type"
                         DelegateChoice {
@@ -221,7 +222,7 @@ Rectangle {
                         currentIndex: listView.currentIndex
                         width: parent.width
                         height: parent.height
-                        Repeater {
+                        Repeater {//отвечает за генерацию листов с настройками
                             model: listMod1
                             ListView {
                                 id: listView1
