@@ -1,16 +1,18 @@
 import QtQuick
-import QtQuick.Controls.Basic
+import QtQuick.Controls.Basic as T
 
-Switch {
+T.Switch {
     id: control
     text: ""
-
+    width: 16*Screen.pixelDensity
+    height: 8*Screen.pixelDensity
     indicator: Rectangle {
-        width: 16*Screen.pixelDensity
-        height: 8*Screen.pixelDensity
-        x: control.leftPadding
-        y: parent.height / 2 - height / 2
+
+
+        //x: 0
+        //y: parent.height / 2 - height / 2
         radius: 4*Screen.pixelDensity
+        anchors.fill: parent
         color: "#515151"
 
         Rectangle {

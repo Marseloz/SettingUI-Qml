@@ -25,28 +25,28 @@ Rectangle {
             name: "Red"
             attributes: [
                 ListElement {
-                    type: "a"
                     text: "Test"
+                    type: "a"
                     var1: 2
                 },
                 ListElement {
-                    type: "a"
                     text: "TestTest"
-                    var1: 6
+                    type: "b"
+                    flag: true
                 },
                 ListElement {
-                    type: "a"
                     text: "Tes"
+                    type: "c"
                     var1: 0
                 },
                 ListElement {
-                    type: "a"
                     text: "TestTest"
+                    type: "d"
                     var1: -1
                 },
                 ListElement {
-                    type: "a"
                     text: "Tes"
+                    type: "a"
                     var1: 11
                 }
             ]
@@ -56,8 +56,8 @@ Rectangle {
             name: "Red2"
             attributes: [
                 ListElement {
-                    type: "a"
                     text: "Test"
+                    type: "a"
                     var1: 2
                 }
             ]
@@ -197,21 +197,75 @@ Rectangle {
                         }
                         DelegateChoice {
                             roleValue: "b"
-                            delegate: Rectangle {
-                                height: 25
-                                width: 100
+                            delegate: RowLayout {
+                                id: rowLayout2
+                                width: parent.width
+                                height: 100
                                 Text {
                                     text: model.text
+                                    verticalAlignment: Text.AlignVCenter
+                                    Layout.fillHeight: true
+                                    Layout.fillWidth: true
+                                    Layout.maximumWidth: 200
+                                    color: "#909090"
+                                }
+                                Item {
+                                    Layout.fillHeight: true
+                                    Layout.fillWidth: true
+                                    Switch {
+                                        anchors.verticalCenter: parent.verticalCenter;
+                                        //Layout.fillHeight: true
+                                        //y:0
+                                        //width: 200
+                                        //value: model.var1
+                                    }
                                 }
                             }
                         }
                         DelegateChoice {
                             roleValue: "c"
-                            delegate: Rectangle {
-                                height: 25
-                                width: 100
+                            delegate: RowLayout {
+                                id: rowLayout3
+                                width: parent.width
+                                height: 100
                                 Text {
                                     text: model.text
+                                    verticalAlignment: Text.AlignVCenter
+                                    Layout.fillHeight: true
+                                    Layout.fillWidth: true
+                                    Layout.maximumWidth: 200
+                                    color: "#909090"
+                                }
+                                Item {
+                                    Layout.fillHeight: true
+                                    Layout.fillWidth: true
+                                    CheckBox {
+                                        //Layout.fillHeight: true
+                                        Layout.fillWidth: true
+                                        //value: model.var1
+                                    }
+                                }
+                            }
+                        }
+                        DelegateChoice {
+                            roleValue: "d"
+                            delegate: RowLayout {
+                                id: rowLayout4
+                                width: parent.width
+                                height: 100
+                                Text {
+                                    text: model.text
+                                    verticalAlignment: Text.AlignVCenter
+                                    Layout.fillHeight: true
+                                    Layout.fillWidth: true
+                                    Layout.maximumWidth: 200
+                                    color: "#909090"
+                                }
+
+                                ComboBox {
+                                    //Layout.fillHeight: true
+                                    Layout.fillWidth: true
+                                    //value: model.var1
                                 }
                             }
                         }
@@ -238,7 +292,7 @@ Rectangle {
 
                                 boundsBehavior: Flickable.StopAtBounds
 
-                                spacing: 10
+                                //spacing: 10
                                 clip: true
                                 ScrollBar.vertical: ScrollBar {//active: true
                                     policy: contentHeight > height ? ScrollBar.AlwaysOn : ScrollBar.AlwaysOff
