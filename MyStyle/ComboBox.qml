@@ -1,15 +1,14 @@
 pragma ComponentBehavior: Bound
 
 import QtQuick
-import QtQuick.Controls.Basic
+import QtQuick.Controls.Basic as T
 
-ComboBox {
+T.ComboBox {
     id: control
     model: ["First", "Second", "Third"]
 
     delegate: ItemDelegate {
         id: delegate
-
         required property var model
         required property int index
 

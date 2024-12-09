@@ -23,6 +23,11 @@ T.Button {
         opacity: enabled ? 1 : 0.3
         color: control.down ? "#757575" : "#515151"
         radius: 1.5*Screen.pixelDensity
+        MouseArea{
+            width: parent.width
+            height: parent.height
+            cursorShape: Qt.PointingHandCursor
+        }
     }
 }
 

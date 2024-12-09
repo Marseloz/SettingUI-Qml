@@ -26,28 +26,38 @@ Rectangle {
             attributes: [
                 ListElement {
                     text: "Test"
-                    type: "a"
-                    var1: 2
+                    type: "slider"
+                    value: 2
+                },
+                ListElement {
+                    text: "Test"
+                    type: "slider"
+                    value: 2
                 },
                 ListElement {
                     text: "TestTest"
-                    type: "b"
-                    flag: true
+                    type: "switch"
+                    value: true
+                },
+                ListElement {
+                    text: "Test"
+                    type: "slider"
+                    value: 2
                 },
                 ListElement {
                     text: "Tes"
                     type: "c"
-                    var1: 0
+                    value: 0
                 },
                 ListElement {
                     text: "TestTest"
                     type: "d"
-                    var1: -1
+                    value: -1
                 },
                 ListElement {
                     text: "Tes"
-                    type: "a"
-                    var1: 11
+                    type: "slider"
+                    value: 11
                 }
             ]
         }
@@ -57,8 +67,8 @@ Rectangle {
             attributes: [
                 ListElement {
                     text: "Test"
-                    type: "a"
-                    var1: 2
+                    type: "slider"
+                    value: 2
                 }
             ]
         }
@@ -174,7 +184,7 @@ Rectangle {
                         id: chooser
                         role: "type"
                         DelegateChoice {
-                            roleValue: "a"
+                            roleValue: "slider"
                             delegate: RowLayout {
                                 id: rowLayout1
                                 width: parent.width
@@ -189,14 +199,14 @@ Rectangle {
                                 }
 
                                 Slider {
-                                    //Layout.fillHeight: true
+                                    Layout.fillHeight: true
                                     Layout.fillWidth: true
-                                    value: model.var1
+                                    value: model.value
                                 }
                             }
                         }
                         DelegateChoice {
-                            roleValue: "b"
+                            roleValue: "switch"
                             delegate: RowLayout {
                                 id: rowLayout2
                                 width: parent.width
@@ -213,11 +223,9 @@ Rectangle {
                                     Layout.fillHeight: true
                                     Layout.fillWidth: true
                                     Switch {
-                                        anchors.verticalCenter: parent.verticalCenter;
-                                        //Layout.fillHeight: true
-                                        //y:0
-                                        //width: 200
-                                        //value: model.var1
+                                        anchors.verticalCenter: parent.verticalCenter
+                                        height: parent.height
+                                        value: model.value
                                     }
                                 }
                             }
@@ -240,9 +248,9 @@ Rectangle {
                                     Layout.fillHeight: true
                                     Layout.fillWidth: true
                                     CheckBox {
-                                        //Layout.fillHeight: true
+                                        anchors.verticalCenter: parent.verticalCenter;
+                                        Layout.fillHeight: true
                                         Layout.fillWidth: true
-                                        //value: model.var1
                                     }
                                 }
                             }

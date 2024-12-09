@@ -4,28 +4,25 @@ import QtQuick.Controls.Basic as T
 T.Switch {
     id: control
     text: ""
-    width: 16*Screen.pixelDensity
     height: 8*Screen.pixelDensity
+    width: height*2
+    property bool value: false
+    checked: control.value
     indicator: Rectangle {
-
-
-        //x: 0
-        //y: parent.height / 2 - height / 2
-        radius: 4*Screen.pixelDensity
+        radius: parent.height/2
         anchors.fill: parent
         color: "#515151"
 
         Rectangle {
             x: control.checked ? parent.width - width - (parent.height-height)/2 : (parent.height-height)/2
-            width: 6.4*Screen.pixelDensity
-            height: 6.4*Screen.pixelDensity
-            radius: 3.2*Screen.pixelDensity
+            width: control.height*0.82
+            height: width
+            radius: height/2
             y: parent.height / 2 - height / 2
             color: control.checked ? "#e6e6e6" : "#353535"
 
         }
     }
-
     contentItem: Text {
         text: control.text
         font: control.font
@@ -34,4 +31,5 @@ T.Switch {
         verticalAlignment: Text.AlignVCenter
         leftPadding: control.indicator.width + control.spacing
     }
+
 }

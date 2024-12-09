@@ -1,7 +1,7 @@
 import QtQuick
-import QtQuick.Controls.Basic
+import QtQuick.Controls.Basic as T
 
-BusyIndicator {
+T.BusyIndicator {
     id: control
 
     contentItem: Item {
@@ -9,7 +9,7 @@ BusyIndicator {
         implicitHeight: 64
 
         Item {
-            id: item
+            id: item1
             x: parent.width / 2 - 32
             y: parent.height / 2 - 32
             width: 64
@@ -23,7 +23,7 @@ BusyIndicator {
             }
 
             RotationAnimator {
-                target: item
+                target: item1
                 running: control.visible && control.running
                 from: 0
                 to: 360
@@ -37,8 +37,8 @@ BusyIndicator {
 
                 Rectangle {
                     id: delegate
-                    x: item.width / 2 - width / 2
-                    y: item.height / 2 - height / 2
+                    x: item1.width / 2 - width / 2
+                    y: item1.height / 2 - height / 2
                     implicitWidth: 10
                     implicitHeight: 10
                     radius: 5
@@ -48,7 +48,7 @@ BusyIndicator {
 
                     transform: [
                         Translate {
-                            y: -Math.min(item.width, item.height) * 0.5 + 5
+                            y: -Math.min(item1.width, item1.height) * 0.5 + 5
                         },
                         Rotation {
                             angle: delegate.index / repeater.count * 360

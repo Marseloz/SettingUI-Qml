@@ -1,27 +1,25 @@
 import QtQuick
-import QtQuick.Controls.Basic
+import QtQuick.Controls.Basic as T
 
-CheckBox {
+T.CheckBox {
     id: control
-    text: qsTr("CheckBox")
-    checked: true
-
+    text: ""
+    property bool value: false
+    checked: value
+    height: 100
+    width: height
     indicator: Rectangle {
-        implicitWidth: 26
-        implicitHeight: 26
-        x: control.leftPadding
-        y: parent.height / 2 - height / 2
-        radius: 3
-        border.color: control.down ? "#17a81a" : "#21be2b"
+        anchors.fill: parent
+        radius: height/2
+        color: "#515151"
 
         Rectangle {
-            width: 14
-            height: 14
-            x: 6
-            y: 6
-            radius: 2
-            color: control.down ? "#17a81a" : "#21be2b"
-            visible: control.checked
+            width: parent.width/2
+            height: parent.height/2
+            radius: height/2
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.horizontalCenter: parent.horizontalCenter
+            color: control.checked ? "#e6e6e6" : "#353535"
         }
     }
 
