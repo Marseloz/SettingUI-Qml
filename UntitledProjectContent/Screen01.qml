@@ -14,10 +14,11 @@ import MyStyle
 
 Rectangle {
     id: rectangle
-    width: 1300
+    width: 1600
     height: Constants.height * 0.8
     color: "#282828"
     border.width: 0
+    property int scaleY:20
 
     ListModel { //модель на основе которой генерируется интерфейс настроек
         id: listMod1
@@ -26,13 +27,15 @@ Rectangle {
             attributes: [
                 ListElement {
                     text: "Test"
-                    type: "slider"
-                    value: 2
+                    type: "headline"
                 },
                 ListElement {
                     text: "Test"
                     type: "slider"
                     value: 2
+                    min: 0
+                    max: 10
+                    fix: true
                 },
                 ListElement {
                     text: "TestTest"
@@ -43,21 +46,42 @@ Rectangle {
                     text: "Test"
                     type: "slider"
                     value: 2
+                    min: -1
+                    max: 2
+                    fix: false
                 },
                 ListElement {
                     text: "Tes"
                     type: "combobox"
                     value: 0
+                    array: [
+                        ListElement{text:"Var1"},
+                        ListElement{text:"Var2"},
+                        ListElement{text:"Var3"},
+                        ListElement{text:"Var4"},
+                        ListElement{text:"Var5"}
+                    ]
                 },
                 ListElement {
                     text: "TestTest"
                     type: "checkbox"
-                    value: -1
+                    value: true
                 },
                 ListElement {
                     text: "Tes"
                     type: "slider"
                     value: 11
+                    min: 0
+                    max: 10
+                    fix: false
+                },
+                ListElement {
+                    text: "Tes"
+                    type: "textfield"
+                    value: 11
+                    min: 0
+                    max: 10
+                    fix: false
                 }
             ]
         }
@@ -69,6 +93,9 @@ Rectangle {
                     text: "Test"
                     type: "slider"
                     value: 2
+                    min: 0
+                    max: 10
+                    fix: false
                 }
             ]
         }
@@ -81,7 +108,7 @@ Rectangle {
             id: rectangle1
             Layout.fillWidth: true
             Layout.fillHeight: true
-            Layout.preferredHeight: parent.width / 11
+            Layout.preferredHeight: parent.height / 15
             Layout.maximumHeight: rectangle1.Layout.preferredHeight
             color: "#353535"
 
@@ -112,7 +139,7 @@ Rectangle {
                 Layout.margins: 20
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                Layout.preferredWidth: parent.width / 3
+                Layout.preferredWidth: parent.width / 4
 
                 ListView {
                     id: listView
@@ -186,12 +213,12 @@ Rectangle {
                         DelegateChoice {
                             roleValue: "slider"
                             delegate: RowLayout {
-                                id: rowLayout1
                                 width: parent.width
-                                height: 100
+                                height: stackLayout.height/scaleY
                                 Text {
                                     text: model.text
                                     verticalAlignment: Text.AlignVCenter
+                                    Layout.leftMargin: 15
                                     Layout.fillHeight: true
                                     Layout.fillWidth: true
                                     Layout.minimumWidth: 200
@@ -203,18 +230,21 @@ Rectangle {
                                     Layout.fillHeight: true
                                     Layout.fillWidth: true
                                     value: model.value
+                                    from: model.min
+                                    to: model.max
+                                    maxStop: model.fix
                                 }
                             }
                         }
                         DelegateChoice {
                             roleValue: "switch"
                             delegate: RowLayout {
-                                id: rowLayout2
                                 width: parent.width
-                                height: 100
+                                height: stackLayout.height/scaleY
                                 Text {
                                     text: model.text
                                     verticalAlignment: Text.AlignVCenter
+                                    Layout.leftMargin: 15
                                     Layout.fillHeight: true
                                     Layout.fillWidth: true
                                     Layout.minimumWidth: 200
@@ -235,12 +265,12 @@ Rectangle {
                         DelegateChoice {
                             roleValue: "checkbox"
                             delegate: RowLayout {
-                                id: rowLayout3
                                 width: parent.width
-                                height: 100
+                                height: stackLayout.height/scaleY
                                 Text {
                                     text: model.text
                                     verticalAlignment: Text.AlignVCenter
+                                    Layout.leftMargin: 15
                                     Layout.fillHeight: true
                                     Layout.fillWidth: true
                                     Layout.minimumWidth: 200
@@ -252,8 +282,8 @@ Rectangle {
                                     Layout.fillWidth: true
                                     CheckBox {
                                         anchors.verticalCenter: parent.verticalCenter;
-                                        Layout.fillHeight: true
-                                        Layout.fillWidth: true
+                                        height: parent.height
+                                        value: model.value
                                     }
                                 }
                             }
@@ -261,12 +291,12 @@ Rectangle {
                         DelegateChoice {
                             roleValue: "combobox"
                             delegate: RowLayout {
-                                id: rowLayout4
                                 width: parent.width
-                                height: 100
+                                height: stackLayout.height/scaleY
                                 Text {
                                     text: model.text
                                     verticalAlignment: Text.AlignVCenter
+                                    Layout.leftMargin: 15
                                     Layout.fillHeight: true
                                     Layout.fillWidth: true
                                     Layout.minimumWidth: 200
@@ -276,7 +306,47 @@ Rectangle {
                                 ComboBox {
                                     Layout.fillHeight: true
                                     Layout.fillWidth: true
-                                    //value: model.var1
+                                    value: model.value
+                                    model: array
+                                }
+                            }
+                        }
+                        DelegateChoice {
+                            roleValue: "headline"
+                            delegate: RowLayout {
+                                width: parent.width
+                                height: stackLayout.height/scaleY
+                                Text {
+                                    text: model.text
+                                    font.pointSize: 15
+                                    verticalAlignment: Text.AlignVCenter
+                                    Layout.fillHeight: true
+                                    Layout.fillWidth: true
+                                    Layout.minimumWidth: 200
+                                    Layout.maximumWidth: 200
+                                    color: "#e6e6e6"
+                                }
+                            }
+                        }
+                        DelegateChoice {
+                            roleValue: "textfield"
+                            delegate: RowLayout {
+                                width: parent.width
+                                height: stackLayout.height/scaleY
+                                Text {
+                                    text: model.text
+                                    verticalAlignment: Text.AlignVCenter
+                                    Layout.leftMargin: 15
+                                    Layout.fillHeight: true
+                                    Layout.fillWidth: true
+                                    Layout.minimumWidth: 200
+                                    Layout.maximumWidth: 200
+                                    color: "#909090"
+                                }
+                                TextField {
+                                    Layout.fillHeight: true
+                                    Layout.fillWidth: true
+                                    text: model.value
                                 }
                             }
                         }
@@ -293,17 +363,16 @@ Rectangle {
                                 id: listView1
 
                                 anchors.fill: parent
-                                //anchors.margins: 20
                                 interactive: false
 
                                 bottomMargin: 20
-                                leftMargin: 20
-                                rightMargin: 20
+                                leftMargin: 40
+                                rightMargin: 30
                                 topMargin: 20
 
                                 boundsBehavior: Flickable.StopAtBounds
 
-                                //spacing: 10
+                                spacing: 10
                                 clip: true
                                 ScrollBar.vertical: ScrollBar {//active: true
                                     policy: contentHeight > height ? ScrollBar.AlwaysOn : ScrollBar.AlwaysOff
@@ -349,7 +418,7 @@ Rectangle {
                 Rectangle {
                     id: rectangle2
                     color: "#353535"
-                    Layout.preferredHeight: parent.width / 6
+                    Layout.preferredHeight: parent.height / 12
                     Layout.maximumHeight: rectangle2.Layout.preferredHeight
                     Layout.fillWidth: true
                     Layout.fillHeight: true

@@ -7,8 +7,9 @@ import QtQuick.Controls.Basic as T
 
 T.ComboBox {
     id: control
-    model: ["First", "Second", "Third", "First", "Second", "Third", "First", "Second", "Third", "First", "Second", "Third", "First", "Second", "Third", "First", "Second", "Third2"]
-
+    model: ["First", "Second", "Third"]
+    property int value: 0
+    currentIndex: value
     delegate: ItemDelegate {
         id: delegate
         required property var model
@@ -34,7 +35,6 @@ T.ComboBox {
 
     indicator: Canvas {
         id: canvas
-
         width: control.height/3
         height: control.height/3.5
         contextType: "2d"
@@ -44,42 +44,26 @@ T.ComboBox {
             width: parent.width
             height: parent.height
             radius: 10
-
             scale: -1
             fillColor: "#b1b1b1"
             arcRadius: 5
-
             strokeWidth: 0
-            //strokeColor: "#808080"
         }
-        /*onPaint: {
-            context.reset();
-            context.moveTo(0, 0);
-            context.lineTo(width, 0);
-            context.lineTo(width / 2, height);
-            context.closePath();
-            context.fillStyle = control.pressed ? "#b1b1b1" : "#b1b1b1";
-            context.fill();
-        }*/
     }
 
     contentItem: Text {
         leftPadding: control.height/3
-        //rightPadding: control.indicator.width + control.spacing
         text: control.displayText
         horizontalAlignment: Text.AlignLeft
         font: control.font
         color: "#d5d5d5"
         verticalAlignment: Text.AlignVCenter
-        //elide: Text.ElideRight
     }
 
     background: Rectangle {
         color: "#515151"
-        //implicitWidth: 120
-        //implicitHeight: 40
         anchors.fill: parent
-        radius: 2*Screen.pixelDensity
+        radius: 2*Screen.pixelDensity*0.8
     }
 
     popup: Popup {
@@ -94,7 +78,6 @@ T.ComboBox {
                 color: "#000000"
             }
             clip: true
-            //implicitHeight: contentHeight
             model: control.popup.visible ? control.delegateModel : null
             currentIndex: control.highlightedIndex
             ScrollBar.vertical: ScrollBar {

@@ -4,21 +4,21 @@ import QtQuick.Controls.Basic as T
 T.CheckBox {
     id: control
     text: ""
-    property bool value: false
-    checked: value
-    height: 100
+    height: 8*Screen.pixelDensity
     width: height
+    property bool value: false
+    checked: control.value
     indicator: Rectangle {
-        anchors.fill: parent
-        radius: height/2
+        height: parent.height
+        width: parent.height
+        radius: parent.height/2
         color: "#515151"
-
         Rectangle {
             width: parent.width/2
             height: parent.height/2
             radius: height/2
-            anchors.verticalCenter: parent.verticalCenter
-            anchors.horizontalCenter: parent.horizontalCenter
+            x: parent.height/4
+            y: parent.height/4
             color: control.checked ? "#e6e6e6" : "#353535"
         }
     }
