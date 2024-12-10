@@ -46,12 +46,12 @@ Rectangle {
                 },
                 ListElement {
                     text: "Tes"
-                    type: "c"
+                    type: "combobox"
                     value: 0
                 },
                 ListElement {
                     text: "TestTest"
-                    type: "d"
+                    type: "checkbox"
                     value: -1
                 },
                 ListElement {
@@ -125,7 +125,7 @@ Rectangle {
                         id: row
                         spacing: 5
                         Item {
-                            height: columnLayout.height / 20
+                            height: Screen.pixelDensity * 9
                             width: columnLayout.width
                             Rectangle {
                                 id: rectangle3
@@ -194,6 +194,7 @@ Rectangle {
                                     verticalAlignment: Text.AlignVCenter
                                     Layout.fillHeight: true
                                     Layout.fillWidth: true
+                                    Layout.minimumWidth: 200
                                     Layout.maximumWidth: 200
                                     color: "#909090"
                                 }
@@ -216,6 +217,7 @@ Rectangle {
                                     verticalAlignment: Text.AlignVCenter
                                     Layout.fillHeight: true
                                     Layout.fillWidth: true
+                                    Layout.minimumWidth: 200
                                     Layout.maximumWidth: 200
                                     color: "#909090"
                                 }
@@ -231,7 +233,7 @@ Rectangle {
                             }
                         }
                         DelegateChoice {
-                            roleValue: "c"
+                            roleValue: "checkbox"
                             delegate: RowLayout {
                                 id: rowLayout3
                                 width: parent.width
@@ -241,6 +243,7 @@ Rectangle {
                                     verticalAlignment: Text.AlignVCenter
                                     Layout.fillHeight: true
                                     Layout.fillWidth: true
+                                    Layout.minimumWidth: 200
                                     Layout.maximumWidth: 200
                                     color: "#909090"
                                 }
@@ -256,7 +259,7 @@ Rectangle {
                             }
                         }
                         DelegateChoice {
-                            roleValue: "d"
+                            roleValue: "combobox"
                             delegate: RowLayout {
                                 id: rowLayout4
                                 width: parent.width
@@ -266,12 +269,12 @@ Rectangle {
                                     verticalAlignment: Text.AlignVCenter
                                     Layout.fillHeight: true
                                     Layout.fillWidth: true
+                                    Layout.minimumWidth: 200
                                     Layout.maximumWidth: 200
                                     color: "#909090"
                                 }
-
                                 ComboBox {
-                                    //Layout.fillHeight: true
+                                    Layout.fillHeight: true
                                     Layout.fillWidth: true
                                     //value: model.var1
                                 }

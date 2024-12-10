@@ -2,6 +2,7 @@ pragma ComponentBehavior: Bound
 
 import QtQuick
 import QtQuick.Controls
+import QtQuick.Studio.Components
 import QtQuick.Controls.Basic as T
 
 T.ComboBox {
@@ -12,11 +13,18 @@ T.ComboBox {
         id: delegate
         required property var model
         required property int index
-
+        background: Rectangle {
+            visible: parent.hovered ? true : false
+            anchors.fill: parent
+            radius: 2*Screen.pixelDensity
+            color: "#757575"
+        }
+        height: control.height
         width: control.width
         contentItem: Text {
+            leftPadding: control.height/4
             text: delegate.model[control.textRole]
-            color: "#000579"
+            color: "#d5d5d5"
             font: control.font
             elide: Text.ElideRight
             verticalAlignment: Text.AlignVCenter
@@ -26,18 +34,25 @@ T.ComboBox {
 
     indicator: Canvas {
         id: canvas
-        x: control.width - width - control.rightPadding
-        y: control.topPadding + (control.availableHeight - height) / 2
-        width: 12
-        height: 8
+
+        width: control.height/3
+        height: control.height/3.5
         contextType: "2d"
+        TriangleItem {
+            x: control.width - width - control.rightPadding
+            y: control.topPadding + (control.availableHeight - height) * 0.54
+            width: parent.width
+            height: parent.height
+            radius: 10
 
-        Connections {
-            target: control
-            function onPressedChanged() { canvas.requestPaint(); }
+            scale: -1
+            fillColor: "#b1b1b1"
+            arcRadius: 5
+
+            strokeWidth: 0
+            //strokeColor: "#808080"
         }
-
-        onPaint: {
+        /*onPaint: {
             context.reset();
             context.moveTo(0, 0);
             context.lineTo(width, 0);
@@ -45,29 +60,30 @@ T.ComboBox {
             context.closePath();
             context.fillStyle = control.pressed ? "#b1b1b1" : "#b1b1b1";
             context.fill();
-        }
+        }*/
     }
 
     contentItem: Text {
-        leftPadding: 0
-        rightPadding: control.indicator.width + control.spacing
-
+        leftPadding: control.height/3
+        //rightPadding: control.indicator.width + control.spacing
         text: control.displayText
+        horizontalAlignment: Text.AlignLeft
         font: control.font
-        color: control.pressed ? "#d5d5d5" : "#d5d5d5"
+        color: "#d5d5d5"
         verticalAlignment: Text.AlignVCenter
-        elide: Text.ElideRight
+        //elide: Text.ElideRight
     }
 
     background: Rectangle {
         color: "#515151"
-        implicitWidth: 120
-        implicitHeight: 40
-        radius: 8
+        //implicitWidth: 120
+        //implicitHeight: 40
+        anchors.fill: parent
+        radius: 2*Screen.pixelDensity
     }
 
     popup: Popup {
-        y: control.height - 1
+        y: control.height + 3
         width: control.width
         implicitHeight: count > 6 ? control.height*6 : control.height*count
         padding: 1
@@ -83,13 +99,12 @@ T.ComboBox {
             currentIndex: control.highlightedIndex
             ScrollBar.vertical: ScrollBar {
                 policy: count > 6 ? ScrollBar.AlwaysOn : ScrollBar.AlwaysOff
-
             }
         }
 
         background: Rectangle {
             color: "#515151"
-            radius: 6
+            radius: 2*Screen.pixelDensity
         }
     }
 }
